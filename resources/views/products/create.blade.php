@@ -13,7 +13,7 @@
                         @csrf
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Nama Produk
+                                Product Name
                             </label>
                             <input type="text" 
                                    name="name" 
@@ -23,7 +23,7 @@
 
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Deskripsi
+                                Description
                             </label>
                             <textarea name="description" 
                                       rows="4"
@@ -33,7 +33,7 @@
 
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Harga
+                                Price
                             </label>
                             <input type="number" 
                                    name="price" 
@@ -43,7 +43,7 @@
 
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Stok
+                                Stock
                             </label>
                             <input type="number" 
                                    name="stock" 
@@ -53,7 +53,7 @@
 
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Gambar Produk
+                                Image Product
                             </label>
                             <input type="file" 
                                    name="image" 
@@ -64,11 +64,11 @@
                         <div class="flex items-center justify-end">
                             <a href="{{ route('products.index') }}" 
                                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-4 transition duration-300">
-                                Batal
+                                Cancel
                             </a>
                             <button type="submit" 
                                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
-                                Simpan Produk
+                                Save Product
                             </button>
                         </div>
                     </form>

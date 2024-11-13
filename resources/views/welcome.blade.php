@@ -56,7 +56,7 @@
                         <span class="block text-blue-600">UniShop</span>
                     </h1>
                     <p class="mt-3 max-w-md mx-auto text-base text-gray-500 dark:text-gray-400 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                        Start building something amazing. This is your blank canvas to create something extraordinary.
+                        Cheap shopping only at UniShop
                     </p>
                     <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
                         <div class="rounded-md shadow">
