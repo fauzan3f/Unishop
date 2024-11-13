@@ -53,7 +53,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required|numeric', 
+            'price' => 'required|numeric',
             'stock' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -61,14 +61,11 @@ class ProductController extends Controller
         $data = $request->except('image');
 
         if ($request->hasFile('image')) {
-            // Hapus gambar lama
-            if($product->image) {
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
             
-            // Upload gambar baru
-            $imagePath = $request->file('image')->store('products', 'public');
-            $data['image'] = $imagePath;
+            $data['image'] = $request->file('image')->store('products', 'public');
         }
 
         $product->update($data);
@@ -77,7 +74,6 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // Hapus gambar dari storage sebelum menghapus produk
         if($product->image) {
             Storage::disk('public')->delete($product->image);
         }
