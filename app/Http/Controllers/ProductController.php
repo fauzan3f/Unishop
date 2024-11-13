@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -22,7 +23,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description' => 'required', 
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
@@ -52,16 +53,35 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer'
+            'price' => 'required|numeric', 
+            'stock' => 'required|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $product->update($request->all());
+        $data = $request->except('image');
+
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama
+            if($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+            
+            // Upload gambar baru
+            $imagePath = $request->file('image')->store('products', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        $product->update($data);
         return redirect()->route('products.index')->with('success', 'Produk berhasil diupdate');
     }
 
     public function destroy(Product $product)
     {
+        // Hapus gambar dari storage sebelum menghapus produk
+        if($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+        
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus');
     }
